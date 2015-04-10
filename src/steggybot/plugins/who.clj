@@ -1,7 +1,7 @@
-(ns goodbot.plugins.who
+(ns steggybot.plugins.who
   "Asks who people are"
-  (:require [goodbot.db :as db]
-            [goodbot.parse :refer [extract-word]]
+  (:require [steggybot.db :as db]
+            [steggybot.parse :refer [extract-word]]
             [datomic.api :as datomic]))
 
 (def who-is-query '[:find ?e :in $ ?nick :where [?e :who.entry/nick ?nick]])

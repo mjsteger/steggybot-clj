@@ -1,6 +1,6 @@
-(ns goodbot.plugins.karma-test
+(ns steggybot.plugins.karma-test
   (:require [clojure.test :refer :all]
-            [goodbot.plugins.karma :as karma]))
+            [steggybot.plugins.karma :as karma]))
 
 (deftest handle-karma
   (testing "+"

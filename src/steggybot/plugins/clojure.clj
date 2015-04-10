@@ -1,4 +1,4 @@
-(ns goodbot.plugins.clojure
+(ns steggybot.plugins.clojure
   "evals snippets of clojure code"
   (:require [irclj.core :as irclj]
             [clojail.core :as clojail]

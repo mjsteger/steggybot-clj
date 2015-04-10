@@ -1,4 +1,4 @@
-(ns goodbot.plugins.ping
+(ns steggybot.plugins.ping
   "Sends a PING back given .pong")
 
 (def plugin {:command "ping"

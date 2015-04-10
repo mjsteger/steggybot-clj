@@ -1,4 +1,4 @@
-(ns goodbot.db
+(ns steggybot.db
   "data functions"
   (:require [datomic.api :as d]))
 

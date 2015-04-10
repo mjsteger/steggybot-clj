@@ -1,9 +1,9 @@
-(ns goodbot.plugins.vote
+(ns steggybot.plugins.vote
   "Sends a PING back given .pong"
-  (:require [goodbot.db :as db]
+  (:require [steggybot.db :as db]
             [datomic.api :as datomic]
             [clojure.algo.generic.functor :refer [fmap]]
-            [goodbot.parse :refer [extract-word]]))
+            [steggybot.parse :refer [extract-word]]))
 
 (defn votes-about [db name]
   (def results (-> '[:find ?e :in $ ?name :where [?e :vote.entry/name ?name]]

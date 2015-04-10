@@ -1,4 +1,4 @@
-(ns goodbot.parse
+(ns steggybot.parse
   "Parsing utilities")
 
 (defn extract-command [message]

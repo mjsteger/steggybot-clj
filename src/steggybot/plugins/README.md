@@ -4,7 +4,7 @@ All plugins in this directory will be loaded into Goodbot on startup.
 
 ## Development
 
-A goodbot [plugin](src/goodbot/plugins/) is a map with the following keys.
+A steggybot [plugin](src/goodbot/plugins/) is a map with the following keys.
 
 ``` clojure
 {:doc {"topic" "text to display on `.help <topic>`"}
@@ -16,4 +16,4 @@ A goodbot [plugin](src/goodbot/plugins/) is a map with the following keys.
 They can define a command -> action linkage that results in a message or a task that is run periodically.
 
 
-See `goodbot.plugins.ping` for a simple example of a command based plugin or `goodbot.plugins.health` for task based.
+See `steggybot.plugins.ping` for a simple example of a command based plugin or `goodbot.plugins.health` for task based.

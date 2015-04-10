@@ -1,6 +1,6 @@
-(ns goodbot.plugins.help
+(ns steggybot.plugins.help
   "Prints documentation for other plugins"
-  (:require [goodbot.parse :refer [extract-word]]
+  (:require [steggybot.parse :refer [extract-word]]
             [clojure.string :refer [join]]))
 
 (defn select-doc [plugins word]

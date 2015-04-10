@@ -1,6 +1,6 @@
-(ns goodbot.parse-test
+(ns steggybot.parse-test
   (:require [clojure.test :refer :all]
-            [goodbot.parse :as parse]))
+            [steggybot.parse :as parse]))
 
 (deftest extract-command
   (testing "when there is a command"

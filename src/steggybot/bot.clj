@@ -1,10 +1,10 @@
-(ns goodbot.bot
+(ns steggybot.bot
   "Wrapper utility to make a bot"
   [:require
    [irclj.core :as irclj]
    [irclj.events]
-   [goodbot.db :as db]
-   [goodbot.parse :refer [extract-command]]
+   [steggybot.db :as db]
+   [steggybot.parse :refer [extract-command]]
    [overtone.at-at :as at]
    [clojure.string :as str]])
 

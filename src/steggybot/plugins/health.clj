@@ -1,7 +1,7 @@
-(ns goodbot.plugins.health
+(ns steggybot.plugins.health
   "Monitors the health of Production."
-  (:require [goodbot.parse :refer [extract-word]]
-            [goodbot.bot :as bot]
+  (:require [steggybot.parse :refer [extract-word]]
+            [steggybot.bot :as bot]
             [irclj.core :as irclj]
             [clj-http.client :as client]
             [clojure.data :as data]))

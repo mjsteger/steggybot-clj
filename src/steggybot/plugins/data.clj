@@ -1,8 +1,8 @@
-(ns goodbot.plugins.data
+(ns steggybot.plugins.data
   "runs datalog queries against the datomic db"
   (:require [clojail.core :as clojail]
             [datomic.api :as datomic]
-            [goodbot.db :as db]))
+            [steggybot.db :as db]))
 
 (def sandbox (clojail/sandbox clojail.testers/secure-tester :timeout 5000))
 
