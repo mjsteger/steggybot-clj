@@ -4,7 +4,7 @@ All plugins in this directory will be loaded into Goodbot on startup.
 
 ## Development
 
-A steggybot [plugin](src/goodbot/plugins/) is a map with the following keys.
+A steggybot [plugin](src/steggybot/plugins/) is a map with the following keys.
 
 ``` clojure
 {:doc {"topic" "text to display on `.help <topic>`"}

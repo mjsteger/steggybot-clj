@@ -13,9 +13,9 @@ This project is set up with leiningen.
 To get started on OSX:
 ``` shell
   brew install leiningen
-  git clone https://github.com/GoodGuide/steggybot.git
-  cd steggybot
+  git clone https://github.com/GoodGuide/steggybot-clj.git
+  cd steggybot-clj
   lein run
 ```
 
-Goodbots can be extended via simple [plugins](src/steggybot/plugins/).
+Goodbots can be extended via simple [plugins](src/steggybot-clj/plugins/).
