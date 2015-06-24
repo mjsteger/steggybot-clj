@@ -21,3 +21,9 @@
 
   (testing "when there is only whitespace"
     (is (nil? (parse/extract-word {:text "     "})))))
+
+(deftest find-regex-uses
+  (testing "with simple match"
+    (is (= (parse/find-regex-uses {:text "testfoo"} #"(test).*") '("test"))))
+  (testing "with no match"
+    (is (= (parse/find-regex-uses {:text "testfoo"} #"asht.*") nil))))
