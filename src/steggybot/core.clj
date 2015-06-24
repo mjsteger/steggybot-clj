@@ -1,5 +1,5 @@
 (ns steggybot.core
-  "Chatbot for GoodGuide"
+  "Chatbot"
   (:require [steggybot.bot :as bot]
             [steggybot.db :as db]
             [clojure.tools.namespace.find :as namespace-tools]
@@ -52,17 +52,23 @@
 (defn load-plugin-symbols []
   (namespace-tools/find-namespaces-in-dir (io/file "src/steggybot/plugins")))
 
-(defn load-plugins []
-  (let [symbols (load-plugin-symbols)]
-    (doseq [ns symbols] (require ns)) ; require all the plugin namespaces
-    (map (fn [plugin] (deref (ns-resolve plugin 'plugin))) symbols)))
+(defn load-plugins
+  ([] (load-plugins (load-plugin-symbols)))
+  ([symbols]
+   (let [symbols (or symbols (load-plugin-symbols))]
+     (doseq [ns symbols] (require ns)) ; require all the plugin namespaces
+     (map (fn [plugin] @(ns-resolve plugin 'plugin)) symbols))))
+
+(defn irc
+  ([] (irc (load-plugins)))
+  ([plugins]
+   (ref {:datomic-uri (datomic-uri)
+         :channels {:fallback "#steggybot-test"}
+         :plugins plugins
+         :tasks (bot/get-task-names plugins)})))
 
 (defn run-task [task-name]
   (def plugins (load-plugins))
-  (def irc (ref {:datomic-uri (datomic-uri)
-                 :channels {:fallback "#steggybot-test"}
-                 :plugins plugins
-                 :tasks (bot/get-task-names plugins)}))
   (println " - setting up database")
   (db/start irc)
   (println " - database setup complete")

@@ -11,10 +11,13 @@
 (defn select-handler [plugins name]
   (->> plugins (map #(get-in % [:commands name])) (remove nil?) first))
 
+(defn select-by-regex [plugins message]
+  (->> plugins (map #(get-in % [:regex])) (remove nil?) (filter #(steggybot.parse/find-regex-uses message (:regex %))) first))
+
+
 (defn respond-with [irc message responses]
   (when-not (nil? responses)
     (println (:target message))
-    (println message)
     (let [message (if (.startsWith (:target message) "#") message (assoc message :target (:user message)))
           vec-responses (if (coll? responses) responses [responses])]
       (println (:target message))
@@ -32,10 +35,15 @@
           (respond-with irc updated-message
             (str "Sorry, I'm not smart enough to "
               (get updated-message :command) ". Try .help instead."))))
+      (if-let [plugin (select-by-regex plugins message)]
+        (do
+          (when-let [responses ((:handler plugin) irc message (steggybot.parse/find-regex-uses message (:regex plugin)))]
+            (respond-with irc message responses))))
       (catch Throwable e
-        (irclj/reply irc message (str "error: " e))
         (println (.getMessage e))
-        (.printStackTrace e)))))
+        ;(stacktrace/print-stack-trace e)
+        (irclj/reply irc message (str "error: " e))))))
+
 
 (defn schedule-tasks [bot plugins]
   "Schedule all plugin tasks"
@@ -44,7 +52,7 @@
   (doseq [plugin plugins]
     (doseq [task (get plugin :tasks)]
       (def work #((:work task) bot))
-      (if (contains? task :interval) 
+      (if (contains? task :interval)
         (at/every (:interval task) work task-scheduler-pool :initial-delay warm-up-delay))
       (if (contains? task :run-at-startup)
         (at/after warm-up-delay work task-scheduler-pool)))))
@@ -58,7 +66,7 @@
   (def messages (if-not (seq? messages) [messages] messages))
   (def channels (:channel-names @bot))
   (let [channel (if (contains? channels requested-channel) requested-channel :fallback)]
-    (if (= channel :fallback) (println "No channel is set for " requested-channel " using fallback.")) 
+    (if (= channel :fallback) (println "No channel is set for " requested-channel " using fallback."))
     (doseq [message messages]
       (irclj/message bot (get channels channel) message))))
 
